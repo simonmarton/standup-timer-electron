@@ -7,7 +7,12 @@ const WINDOW_HEIGHT = 120;
 const menuTemplate = [
   {
     label: 'Edit',
-    submenu: [{ label: 'Quit', role: 'quit' }, { type: 'separator' }, { label: 'Whatever' }]
+    submenu: [
+      { label: 'Quit', role: 'quit' },
+      { label: 'Refresh', role: 'reload' },
+      { type: 'separator' },
+      { label: 'Whatever' }
+    ]
   }
 ];
 
@@ -27,7 +32,7 @@ app.on('ready', () => {
     frame: false,
     resizable: false,
     alwaysOnTop: true,
-    opacity: 0.75
+    opacity: 0.9
   });
 
   window.setVisibleOnAllWorkspaces(true);
