@@ -1,0 +1,17 @@
+{
+  "name": "standup-timer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron index.js",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "4.0.4",
+    "electron-builder": "^20.38.5"
+  }
+}
