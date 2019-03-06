@@ -1,17 +1,31 @@
 const electron = require('electron');
 const { app, BrowserWindow, Menu } = electron;
 
-const WINDOW_WIDTH = 240;
-const WINDOW_HEIGHT = 120;
+const WINDOW_WIDTH = 220;
+const WINDOW_HEIGHT = 80;
+
+const PROD_URL = 'https://simonmarton.github.io/standup-timer';
+const DEBUG_URL = 'http://localhost:8080';
 
 const menuTemplate = [
   {
-    label: 'Edit',
+    label: '',
     submenu: [
       { label: 'Quit', role: 'quit' },
       { label: 'Refresh', role: 'reload' },
       { type: 'separator' },
-      { label: 'Whatever' }
+      {
+        label: 'Debug on localhost',
+        type: 'checkbox',
+        accelerator: 'CmdOrCtrl+D',
+        click: (menuItem, browserWindow) => {
+          menuItem.checked = !!menuItem.checked;
+
+          const url = menuItem.checked ? DEBUG_URL : PROD_URL;
+          browserWindow.loadURL(url);
+        }
+      },
+      { role: 'toggleDevTools' }
     ]
   }
 ];
@@ -24,7 +38,7 @@ app.on('ready', () => {
   const { screen } = electron;
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 
-  const window = new BrowserWindow({
+  const browserWindow = new BrowserWindow({
     width: WINDOW_WIDTH,
     height: WINDOW_HEIGHT,
     x: width - 220,
@@ -35,9 +49,9 @@ app.on('ready', () => {
     opacity: 0.9
   });
 
-  window.setVisibleOnAllWorkspaces(true);
+  browserWindow.setVisibleOnAllWorkspaces(true);
 
-  window.loadURL(`https://simonmarton.github.io/standup-timer`);
+  browserWindow.loadURL(PROD_URL);
 
   Menu.setApplicationMenu(menu);
 });
